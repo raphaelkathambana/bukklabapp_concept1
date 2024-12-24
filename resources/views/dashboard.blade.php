@@ -12,7 +12,7 @@
                     {{ __("You're logged in!") }}
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Here you will be able to see a summary of all stats: Books you're readingm, your progress, your streak and call to actions to add a log") }}
+                    {{ __("Here you will be able to see a summary of all stats: Books you're reading, your progress, your streak and call to actions to add a log") }}
                 </div>
             </div>
         </div>
