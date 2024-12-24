@@ -33,8 +33,11 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('books')" :active="request()->routeIs('books')" wire:navigate>
-                        {{ __('Books') }}
+                    <x-nav-link :href="route('bookshelves.index')" :active="request()->routeIs('bookshelves.index')" wire:navigate>
+                        {{ __('My Collections') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
+                        {{ __('My Books') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -87,8 +90,11 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('books')" :active="request()->routeIs('books')" wire:navigate>
-                {{ __('Books') }}
+            <x-responsive-nav-link :href="route('bookshelves.index')" :active="request()->routeIs('bookshelves.index')" wire:navigate>
+                {{ __('My Collections') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
+                {{ __('My Books') }}
             </x-responsive-nav-link>
         </div>
 
