@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['reading', 'completed', 'on-hold', 'dropped']);
+            $table->enum('status', ['reading', 'completed', 'on-hold', 'dropped', 'to-read'])->default('to-read');
             $table->integer('current_page')->unsigned()->default(0);
             $table->timestamp('started_at')->nullable();
             $table->timestamp('completed_at')->nullable();
