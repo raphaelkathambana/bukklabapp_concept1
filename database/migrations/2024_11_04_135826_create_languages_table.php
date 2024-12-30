@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->string('code', 2)->primary(); // ISO 639-1 code as primary key
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
