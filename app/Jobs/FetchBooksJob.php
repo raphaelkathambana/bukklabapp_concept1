@@ -37,7 +37,7 @@ class FetchBooksJob implements ShouldQueue
 
         if (empty($bookData['volumeInfo']) && empty($bookData['items'][0]['volumeInfo'])) {
             dd($bookData);
-            throw new \Exception('Invalid book data from API');
+            throw new \App\Exceptions\InvalidBookDataException('Invalid book data from API');
         } elseif (!empty($bookData['items'][0]['volumeInfo'])) {
             $bookData = $bookData['items'][0];
         }
