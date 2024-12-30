@@ -16,6 +16,7 @@ class BookCard extends Component
         public $author,
         public string $language,
         public string $cover,
+        public $id,
     )
     {
         //
