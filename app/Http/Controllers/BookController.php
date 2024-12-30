@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
-use App\GoogleBooksTrait;
+use App\Traits\GoogleBooksTrait;
 use App\Jobs\FetchBooksJob;
 use App\Http\Resources\BookCollection;
 
@@ -13,13 +13,6 @@ class BookController extends Controller
 {
     use GoogleBooksTrait;
 
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-        $books = $this->searchBooks($query);
-
-        return view('books.search', compact('books'));
-    }
     public function fetchBooksAsync(Request $request)
     {
         $query = $request->input('query');
@@ -69,10 +62,22 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show(String $id)
     {
-        //
+        $user = auth()->user();
+
+        $book = Book::with(['authors:id,name', 'genres:id,name', 'readingLogs'])
+            ->where('id', $id)
+            ->firstOrFail();
+
+        $userBook = $book->users()->where('user_id', $user->id)->first();
+
+        return view('books.show', [
+            'book' => $book,
+            'userBook' => $userBook,
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -96,6 +101,11 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        return view('books.search');
     }
 }
 /**
