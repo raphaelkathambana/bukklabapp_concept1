@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('isbn', 13)->unique()->nullable();
-            $table->string('cover_image')->nullable();
+            $table->text('cover_image')->nullable();
             $table->integer('pages')->unsigned();
             $table->text('description')->nullable();
             $table->string('language', 2)->default('en');
