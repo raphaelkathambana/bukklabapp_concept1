@@ -1,3 +1,19 @@
+<?php
+
+use App\Livewire\Actions\Logout;
+use Livewire\Volt\Component;
+
+new class extends Component {
+    /**
+     * Log the current user out of the application.
+     */
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/', navigate: true);
+    }
+}; ?>
 <nav x-data="{ open: false }"
     class="bg-background-100 dark:bg-background-800 border-b border-background-200 dark:border-background-700">
     <!-- Primary Navigation Menu -->
@@ -26,6 +42,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
                         {{ __('My Books') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
+                        {{ __('My Clubs') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -90,6 +109,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
                 {{ __('My Books') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')" wire:navigate>
+                {{ __('My Clubs') }}
             </x-responsive-nav-link>
         </div>
 
