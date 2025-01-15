@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookShelfController;
+use App\Http\Controllers\ClubController;
+use App\Http\Controllers\ClubMemberController;
+use App\Http\Controllers\ClubReadingLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReadingLogController;
 
@@ -62,6 +65,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/monthly', [ReadingStatsController::class, 'monthlyDetails'])->name('stats.monthly');
         Route::get('/insights', [ReadingStatsController::class, 'insights'])->name('stats.insights');
     });
+
+    // Club routes
+    Route::resource('clubs', ClubController::class)->except(['create', 'edit']);
+    Route::get('clubs/{club}/members', [ClubMemberController::class, , 'index'])->name('clubs.members.index');
+    Route::post('clubs/{club}/members', [ClubMemberController::class, 'store'])->name('clubs.members.store');
+    Route::delete('clubs/{club}/members/{user}', [ClubMemberController::class, 'destroy'])->name('clubs.members.destroy');
+
+    // Club Book routes
+    Route::resource('club-books', ClubBookController::class)->except(['create', 'edit']);
+
+    // Club Reading Log routes
+    Route::resource('club-reading-logs', ClubReadingLogController::class)->except(['create', 'edit']);
+
+    // Club Leaderboard routes
+    Route::get('club-leaderboards/{club}', [ClubLeaderboardController::class, 'show'])->name('club-leaderboards.show');
+
 });
 
 Route::view('profile', 'profile')
