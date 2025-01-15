@@ -40,6 +40,12 @@ trait GoogleBooksTrait
         return $response->json();
     }
 
+    public function validateDate($date, $format = 'Y-m-d')
+    {
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) === $date;
+    }
+
     /**
      * Transform the Google Books API response into a format suitable for your database.
      *
@@ -52,9 +58,9 @@ trait GoogleBooksTrait
             'title' => $volumeInfo['title'] ?? 'Untitled',
             'isbn' => $volumeInfo['industryIdentifiers'][0]['identifier'] ?? null,
             'description' => $volumeInfo['description'] ?? null,
-            'cover_image' => $volumeInfo['imageLinks']['thumbnail'] ?? null,
+            'cover_image' => $volumeInfo['imageLinks']['thumbnail'] ?? "https://example.com/default-cover.jpg",
             'language' => $volumeInfo['language'] ?? 'unknown',
-            'published_date' => $volumeInfo['publishedDate'] ?? null,
+            'published_date' => ($this->validateDate($volumeInfo['publishedDate']) ? $volumeInfo['publishedDate'] : null) ?? null,
             'pages' => $volumeInfo['pageCount'] ?? null,
         ];
     }
