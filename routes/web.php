@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Club routes
     Route::resource('clubs', ClubController::class)->except(['create', 'edit']);
-    Route::get('clubs/{club}/members', [ClubMemberController::class, , 'index'])->name('clubs.members.index');
+    Route::get('clubs/{club}/members', [ClubMemberController::class, 'index'])->name('clubs.members.index');
     Route::post('clubs/{club}/members', [ClubMemberController::class, 'store'])->name('clubs.members.store');
     Route::delete('clubs/{club}/members/{user}', [ClubMemberController::class, 'destroy'])->name('clubs.members.destroy');
 
