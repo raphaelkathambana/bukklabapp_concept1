@@ -43,17 +43,27 @@ class BookShelfController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BookShelf $bookShelf)
+    public function show($id)
     {
-        //
+        $shelf = BookShelf::with(['items:book_shelf_id,book_id'])
+            ->where('id', $id)
+            ->firstOrFail();
+        return view('bookshelf.show', [
+            'shelf' => $shelf,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BookShelf $bookShelf)
+    public function edit($id)
     {
-        //
+        $shelf = BookShelf::with(['items:book_shelf_id,book_id'])
+            ->where('id', $id)
+            ->firstOrFail();
+        return view('bookshelf.edit', [
+            'shelf' => $shelf,
+        ]);
     }
 
     /**
