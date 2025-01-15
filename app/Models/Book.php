@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,15 @@ class Book extends Model
         'series_id',
         'series_order'
     ];
+
+    public function scopeSearch(Builder $query, string $term): Builder
+    {
+        return $query->where('title', 'like', "%{$term}%")
+            ->orWhere('isbn', 'like', "%{$term}%")
+            ->orWhereHas('authors', function ($q) use ($term) {
+                $q->where('name', 'like', "%{$term}%");
+            });
+    }
 
     public function readingLogs()
     {
